@@ -103,7 +103,7 @@ public class GameScreen {
             }
         }
     }
-
+//will new gitIgnore work?
     private void initScreen() {
         screen = new MyNode[tilesInWidth][tilesInHeight];
         for (int y = 0; y < tilesInHeight; y++) {

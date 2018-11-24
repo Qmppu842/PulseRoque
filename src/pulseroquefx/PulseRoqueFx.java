@@ -1,6 +1,7 @@
 package pulseroquefx;
 
 import javafx.application.Application;
+import javafx.scene.Scene;
 import javafx.stage.Stage;
 import pulseroquefx.graphics.GameScreen;
 
@@ -14,7 +15,7 @@ public class PulseRoqueFx extends Application {
     public void start(Stage primaryStage) {
         GameScreen gs = new GameScreen(primaryStage);
         gs.start();
-        char[][][] map = new char[41][41][1];
+        char[][] map = new char[41][41];
         for (int y = 0; y < 41; y++) {
             for (int x = 0; x < 41; x++) {
                 char sym = 'v';
@@ -23,20 +24,17 @@ public class PulseRoqueFx extends Application {
                 } else if (x > 15) {
                     sym = 'a';
                 }
-                map[y][x][0] = sym;
+                if (y > 35) {
+                    sym = 'O';
+                }
+                map[y][x] = sym;
             }
         }
-        gs.draw(map, 40, 40, 0);
-        char[][][] test = {
-            {
-                {'k', 'p', 's'},
-                {'1', '2', '3'}
-            },
-            {
-                {'g', 'd', 'r'},
-                {'5', '6', '7'}
-            }
-        };
+        gs.draw(map, 23, 30);
+        
+        Scene scene = gs.getScene();
+    
+        
     }
 
     /**

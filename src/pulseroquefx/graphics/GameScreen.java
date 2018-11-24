@@ -25,8 +25,8 @@ public class GameScreen {
      */
     private static final int SCENE_WIDTH = 800;
     private static final int SCENE_HEIGHT = 800;
-    private static final int TILES_IN_SCREEN_WIDTH = 71;
-    private static final int TILES_IN_SCREEN_HEIGHT = 71;
+    private static final int TILES_IN_SCREEN_WIDTH = 71-50;
+    private static final int TILES_IN_SCREEN_HEIGHT = 71-50;
 
     private double gridWidth = SCENE_WIDTH / TILES_IN_SCREEN_WIDTH;
     private double gridHeight = SCENE_HEIGHT / TILES_IN_SCREEN_HEIGHT;
@@ -66,7 +66,7 @@ public class GameScreen {
 //            }
 //        }
 
-        scene = new Scene(root, SCENE_WIDTH, SCENE_HEIGHT);
+        scene = new Scene(root, SCENE_WIDTH+boardOffset+10, SCENE_HEIGHT+boardOffset+10);
         stage.setScene(scene);
         stage.show();
 
@@ -80,9 +80,9 @@ public class GameScreen {
     private int tileHeight;
     private int fontSize;
     private int zoomLevel = 3;
-    private int boardOffset = 100;
+    private int boardOffset = 15;
 
-    public void draw(char[][][] map, int centerX, int centerY, int centerZ) {
+    public void draw(char[][] map, int centerX, int centerY) {
         int yOffset = map.length-1 - centerY + 10;
         if (centerY + 10 > map.length) {
             
@@ -95,7 +95,7 @@ public class GameScreen {
         for (int y = 0; y < tilesInHeight; y++) {
             for (int x = 0; x < tilesInWidth; x++) {
                 if (x < xMax || y < yMax) {
-                    screen[y][x].getLabel().setText("" + map[yMin + y][xMin + x][centerZ]);
+                    screen[y][x].getLabel().setText("" + map[yMin + y][xMin + x]);
                 } else {
                     screen[y][x].getLabel().setText("M");
 ////                    screen[y][x].
@@ -135,6 +135,10 @@ public class GameScreen {
 //        }
     }
 
+    public Scene getScene() {
+        return scene;
+    }
+
     private class MyNode extends StackPane {
 
         private Label label;
@@ -153,7 +157,7 @@ public class GameScreen {
             Color edit = Color.RED;//.deriveColor(1, 1, 1, 0.5);
             textColor = edit;
             borderColor = Color.ALICEBLUE;
-            fontSize = 15;
+            fontSize = 40;
 
             rect = new Rectangle(gridWidth, gridHeight);
 //            rect.setFill(Color.AQUA);

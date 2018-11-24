@@ -89,15 +89,25 @@ public class GameScreen {
 //        }
         int yMin = Math.max(centerY - 10, 0);
         int xMin = Math.max(centerX - 10, 0);
-        int yMax = Math.min(map.length-1, centerY + 10);
-        int xMax = Math.min(map[yMin].length-1, centerX + 10);
+        int yMax = Math.min(map.length - 1, centerY + 10);
+        int xMax = Math.min(map[yMin].length - 1, centerX + 10);
+
+        if (yMin == 0) {
+            yMax = Math.min(map.length - 1, yMin + 20);
+        } else if (yMax == map.length - 1) {
+            yMin = Math.max(yMax - 20, 0);
+        }
+        if (xMin == 0) {
+            xMax = Math.min(map[yMin].length - 1, xMin + 20);
+        } else if (xMax == map.length - 1) {
+            xMin = Math.max(xMax - 20, 0);
+        }
 
         for (int y = 0; y < tilesInHeight; y++) {
             for (int x = 0; x < tilesInWidth; x++) {
                 if (y > yMax || x > xMax) {
                     screen[y][x].setVisible(false);
-                }else
-//                if (x < xMax || y < yMax) 
+                } else //                if (x < xMax || y < yMax) 
                 {
                     screen[y][x].getLabel().setText("" + map[yMin + y][xMin + x]);
                     screen[y][x].setVisible(true);

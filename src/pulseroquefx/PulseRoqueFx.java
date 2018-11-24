@@ -19,10 +19,10 @@ public class PulseRoqueFx extends Application {
     public void start(Stage primaryStage) {
         GameScreen gs = new GameScreen(primaryStage);
         gs.start();
-        int size = 50;
+        int size = 5;
         char[][] map = new char[size][size];
-        for (int y = 0; y < size; y++) {
-            for (int x = 0; x < size; x++) {
+        for (int y = 0; y < size - 1; y++) {
+            for (int x = 0; x < size - 1; x++) {
                 char sym = 'v';
                 if (x > 30) {
                     sym = 'x';
@@ -35,30 +35,35 @@ public class PulseRoqueFx extends Application {
                 map[y][x] = sym;
             }
         }
+        for (int i = 0; i < size; i++) {
+            map[size - 1][i] = '#';
+            map[i][size - 1] = '#';
+        }
         gs.draw(map, xx, yy);
 
         Scene scene = gs.getScene();
         scene.setOnKeyPressed(event -> {
-            //KeyTypeds works with this:
-//            if (event.getCharacter().equals("c")) {
-//                System.out.println("moii");
-//            }
             if (event.getCode() == KeyCode.A) {
                 xx--;
-                gs.draw(map, xx, yy);
+                xx = Math.max(xx, 0);
+//                gs.draw(map, xx, yy);
             }
             if (event.getCode() == KeyCode.D) {
                 xx++;
-                gs.draw(map, xx, yy);
+                xx = Math.min(xx, map.length - 1);
+//                gs.draw(map, xx, yy);
             }
             if (event.getCode() == KeyCode.W) {
                 yy--;
-                gs.draw(map, xx, yy);
+                yy = Math.max(yy, 0);
+//                gs.draw(map, xx, yy);
             }
             if (event.getCode() == KeyCode.S) {
                 yy++;
-                gs.draw(map, xx, yy);
+                yy = Math.min(yy, map.length - 1);
             }
+            System.out.println("xx: " + xx + ", yy: " + yy);
+            gs.draw(map, xx, yy);
         });
 
     }

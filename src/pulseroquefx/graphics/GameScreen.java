@@ -25,8 +25,8 @@ public class GameScreen {
      */
     private static final int SCENE_WIDTH = 800;
     private static final int SCENE_HEIGHT = 800;
-    private static final int TILES_IN_SCREEN_WIDTH = 71-50;
-    private static final int TILES_IN_SCREEN_HEIGHT = 71-50;
+    private static final int TILES_IN_SCREEN_WIDTH = 71 - 50;
+    private static final int TILES_IN_SCREEN_HEIGHT = 71 - 50;
 
     private double gridWidth = SCENE_WIDTH / TILES_IN_SCREEN_WIDTH;
     private double gridHeight = SCENE_HEIGHT / TILES_IN_SCREEN_HEIGHT;
@@ -66,7 +66,7 @@ public class GameScreen {
 //            }
 //        }
 
-        scene = new Scene(root, SCENE_WIDTH+boardOffset+10, SCENE_HEIGHT+boardOffset+10);
+        scene = new Scene(root, SCENE_WIDTH + boardOffset + 10, SCENE_HEIGHT + boardOffset + 10);
         stage.setScene(scene);
         stage.show();
 
@@ -83,27 +83,35 @@ public class GameScreen {
     private int boardOffset = 15;
 
     public void draw(char[][] map, int centerX, int centerY) {
-        int yOffset = map.length-1 - centerY + 10;
-        if (centerY + 10 > map.length) {
-            
-        }
+//        int yOffset = map.length - 1 - centerY + 10;
+//        if (centerY + 10 > map.length) {
+//
+//        }
         int yMin = Math.max(centerY - 10, 0);
         int xMin = Math.max(centerX - 10, 0);
-        int yMax = Math.min(map.length, centerY + 10);
-        int xMax = Math.min(map[yMin].length, centerX + 10);
-        
+        int yMax = Math.min(map.length-1, centerY + 10);
+        int xMax = Math.min(map[yMin].length-1, centerX + 10);
+
         for (int y = 0; y < tilesInHeight; y++) {
             for (int x = 0; x < tilesInWidth; x++) {
-                if (x < xMax || y < yMax) {
+                if (y > yMax || x > xMax) {
+                    screen[y][x].setVisible(false);
+                }else
+//                if (x < xMax || y < yMax) 
+                {
                     screen[y][x].getLabel().setText("" + map[yMin + y][xMin + x]);
-                } else {
-                    screen[y][x].getLabel().setText("M");
-////                    screen[y][x].
+                    screen[y][x].setVisible(true);
+
                 }
+//                else {
+//                    screen[y][x].getLabel().setText("M");
+//////                    screen[y][x].
+//                }
             }
         }
     }
 //will new gitIgnore work?
+
     private void initScreen() {
         screen = new MyNode[tilesInWidth][tilesInHeight];
         for (int y = 0; y < tilesInHeight; y++) {

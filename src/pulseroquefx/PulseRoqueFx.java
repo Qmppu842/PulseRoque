@@ -22,7 +22,6 @@ public class PulseRoqueFx extends Application {
         GameScreen gs = new GameScreen(primaryStage);
         gs.start();
 
-
 //        int size = 10;
 //        char[][] map = new char[size][size];
 //        for (int y = 0; y < size - 1; y++) {
@@ -81,7 +80,11 @@ public class PulseRoqueFx extends Application {
             }
 //            System.out.println("xx: " + xx + ", yy: " + yy);
 //            gs.draw(map, xx, yy);
-            gs.draw(game.move(x, y));
+            if (x == 0 && y == 0) {
+                gs.draw(game.idle());
+            } else {
+                gs.draw(game.move(x, y));
+            }
         });
 
     }

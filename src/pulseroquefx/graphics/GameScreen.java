@@ -13,6 +13,7 @@ import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 import javafx.stage.Stage;
+import pulseroquefx.thegame.mapAndCenter;
 
 /**
  *
@@ -82,6 +83,10 @@ public class GameScreen {
     private int zoomLevel = 3;
     private int boardOffset = 15;
 
+    public void draw(mapAndCenter a) {
+        draw(a.getMap(), a.getCenterX(), a.getCenterY());
+    }
+    
     public void draw(char[][] map, int centerX, int centerY) {
 //        int yOffset = map.length - 1 - centerY + 10;
 //        if (centerY + 10 > map.length) {

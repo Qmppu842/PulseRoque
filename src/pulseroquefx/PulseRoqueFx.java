@@ -13,8 +13,6 @@ import pulseroquefx.thegame.CoreGame;
  */
 public class PulseRoqueFx extends Application {
 
-//    int xx = 0;
-//    int yy = 0;
     @Override
     public void start(Stage primaryStage) {
         CoreGame game = new CoreGame();

@@ -21,14 +21,6 @@ public class CoreGame {
         for (int y = 0; y < size - 1; y++) {
             for (int x = 0; x < size - 1; x++) {
                 char sym = '.';
-//                if (x > 30) {
-//                    sym = 'x';
-//                } else if (x > 15) {
-//                    sym = '✍';
-//                }
-//                if (y > 35) {
-//                    sym = 'O';
-//                }
                 map[y][x] = sym;
             }
         }
@@ -85,13 +77,13 @@ public class CoreGame {
     private class Tile {
 
         private boolean isPassable;
-        private char oldSymbol;
+        private final char OLD_SYMBOL;
         private char currentSymbol;
         private boolean isHereSomething;
 
         public Tile(boolean isPassable, char symbol) {
             this.isPassable = isPassable;
-            this.oldSymbol = symbol;
+            this.OLD_SYMBOL = symbol;
             isHereSomething = false;
         }
 
@@ -124,7 +116,7 @@ public class CoreGame {
          * @return
          */
         public char popSymbol() {
-            char symbolToReturn = oldSymbol;
+            char symbolToReturn = OLD_SYMBOL;
             if (isHereSomething) {
                 symbolToReturn = currentSymbol;
             }
@@ -138,7 +130,7 @@ public class CoreGame {
          * @return
          */
         public char peekSymbol() {
-            char symbolToReturn = oldSymbol;
+            char symbolToReturn = OLD_SYMBOL;
             if (isHereSomething) {
                 symbolToReturn = currentSymbol;
             }

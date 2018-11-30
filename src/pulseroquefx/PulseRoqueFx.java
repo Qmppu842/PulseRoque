@@ -59,14 +59,16 @@ public class PulseRoqueFx extends Application {
             event.getX();
             int trueX = (int) Math.floor(gs.figureMapX(event.getX()));
             int trueY = (int) Math.floor(gs.figureMapY(event.getY()));
+//            System.out.println("_________________________");
+//            System.out.println("event X: " + event.getX());
+//            System.out.println("event Y: " + event.getY());
+//            System.out.println("true X: " + trueX);
+//            System.out.println("true Y: " + trueY);
 
-            System.out.println("event X: " + event.getX());
-            System.out.println("event Y: " + event.getY());
-            System.out.println("true X: " + trueX);
-            System.out.println("true Y: " + trueY);
-
-            Point pPos = gs.getLocalPPos();
-            gs.draw(game.move(trueX - pPos.x, trueY - pPos.y));
+            Point localPPos = gs.getLocalPPos();
+//            System.out.println("lPPos: " + localPPos);
+//            Point localDistBetweenPAndClick = localPPos.distanc;
+            gs.draw(game.move(trueX - localPPos.x, trueY - localPPos.y));
         });
 
     }

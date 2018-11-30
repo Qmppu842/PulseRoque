@@ -10,7 +10,6 @@ import pulseroquefx.thegame.mapthings.Tile;
  */
 public class CoreGame {
 
-//    private char[][] map;
     private int size;
     private Point pPos;
     private Tile[][] map2;
@@ -18,20 +17,6 @@ public class CoreGame {
     public CoreGame() {
         pPos = new Point(1, 1);
         size = 50;
-//        map = new char[size][size];
-//        for (int y = 0; y < size - 1; y++) {
-//            for (int x = 0; x < size - 1; x++) {
-//                char sym = '.';
-//                map[y][x] = sym;
-//            }
-//        }
-//        for (int i = 0; i < size; i++) {
-//            map[size - 1][i] = '#';
-//            map[i][size - 1] = '#';
-//            map[0][i] = '#';
-//            map[i][0] = '#';
-//        }
-//        map[pPos.y][pPos.x] = '@';
         initBasicMap();
     }
 
@@ -52,6 +37,7 @@ public class CoreGame {
         }
         map2[pPos.y][pPos.x].setCurrentSymbol('@');
     }
+
     //TODO: Istead of coregame commanding player directly, there should be Player class that has distinct actions.
     //And then coreGame should have method turn that goes through list of things that have turns.
     public mapAndCenter idle() {
@@ -71,7 +57,7 @@ public class CoreGame {
     public mapAndCenter move(Point dir) {
         Point oldLoc = (Point) pPos.clone();
         pPos.translate(dir.x, dir.y);
-        
+
         Tile target = map2[pPos.y][pPos.x];
         Tile oldLocation = map2[oldLoc.y][oldLoc.x];
         if (target.isIsPassable()) {
@@ -79,76 +65,7 @@ public class CoreGame {
             target.setCurrentSymbol(thignToMove);
             oldLocation.setCurrentSymbol('x');
         }
-        
-//        map[pPos.y][pPos.x] = '@';
-//        map[oldLoc.y][oldLoc.x] = 'x';
 
         return new mapAndCenter(pPos, map2);
     }
-
-//    private class Tile {
-//
-//        private boolean isPassable;
-//        private final char OLD_SYMBOL;
-//        private char currentSymbol;
-//        private boolean isHereSomething;
-//
-//        public Tile(boolean isPassable, char symbol) {
-//            this.isPassable = isPassable;
-//            this.OLD_SYMBOL = symbol;
-//            isHereSomething = false;
-//        }
-//
-//        public boolean isIsPassable() {
-//            return isPassable;
-//        }
-//        /**
-//         * Can Entities enter to this tile.
-//         * @param isPassable 
-//         */
-//        public void setIsPassable(boolean isPassable) {
-//            this.isPassable = isPassable;
-//        }
-//
-//        /**
-//         * Enter to this tile. This also sets currentSymbol as the thing that
-//         * entered.
-//         *
-//         * @param currentSymbol
-//         */
-//        public void setCurrentSymbol(char currentSymbol) {
-//            this.currentSymbol = currentSymbol;
-//            isHereSomething = true;
-//        }
-//
-//        /**
-//         * Returns the symbol to display and removes it from this tile if this
-//         * tile had something to remove.
-//         *
-//         * @return
-//         */
-//        public char popSymbol() {
-//            char symbolToReturn = OLD_SYMBOL;
-//            if (isHereSomething) {
-//                symbolToReturn = currentSymbol;
-//            }
-//            isHereSomething = false;
-//            return symbolToReturn;
-//        }
-//
-//        /**
-//         * Returns the symbol to display without removing it from tile
-//         *
-//         * @return
-//         */
-//        public char peekSymbol() {
-//            char symbolToReturn = OLD_SYMBOL;
-//            if (isHereSomething) {
-//                symbolToReturn = currentSymbol;
-//            }
-//            return symbolToReturn;
-//        }
-//
-//    }
-
 }

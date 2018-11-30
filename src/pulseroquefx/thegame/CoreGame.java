@@ -12,6 +12,7 @@ public class CoreGame {
     private char[][] map;
     private int size;
     private Point pPos;
+    private Tile[][] map2;
 
     public CoreGame() {
         pPos = new Point(1, 1);
@@ -40,6 +41,23 @@ public class CoreGame {
         map[pPos.y][pPos.x] = '@';
     }
 
+    public void initBasicMap() {
+        map2 = new Tile[size][size];
+        char floor = '.';
+        for (int y = 0; y < size - 1; y++) {
+            for (int x = 0; x < size - 1; x++) {
+                map2[y][x] = new Tile(true, floor);
+            }
+        }
+        char wall = '#';
+        for (int i = 0; i < size; i++) {
+            map2[size - 1][i] = new Tile(false, wall);
+            map2[i][size - 1] = new Tile(false, wall);
+            map2[0][i] = new Tile(false, wall);
+            map2[i][0] = new Tile(false, wall);
+        }
+    }
+
     public mapAndCenter idle() {
         return new mapAndCenter(pPos, map);
     }
@@ -55,6 +73,38 @@ public class CoreGame {
         map[oldLoc.y][oldLoc.x] = 'x';
 
         return new mapAndCenter(pPos, map);
+    }
+
+    private class Tile {
+
+        private boolean isPassable;
+        private char symbol;
+
+        public Tile(boolean isPassable, char symbol) {
+            this.isPassable = isPassable;
+            this.symbol = symbol;
+        }
+
+        public boolean isIsPassable() {
+            return isPassable;
+        }
+
+        public void setIsPassable(boolean isPassable) {
+            this.isPassable = isPassable;
+        }
+
+        public char getSymbol() {
+            return symbol;
+        }
+
+        public void setSymbol(char symbol) {
+            this.symbol = symbol;
+        }
+
+    }
+    
+    private class ThingOnTiles{
+    
     }
 
 }

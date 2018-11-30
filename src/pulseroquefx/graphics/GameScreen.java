@@ -1,10 +1,13 @@
 package pulseroquefx.graphics;
 
 import java.awt.Font;
+import java.awt.Point;
+import javafx.event.EventHandler;
 import javafx.geometry.Insets;
 import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Background;
 import javafx.scene.layout.BackgroundFill;
 import javafx.scene.layout.Border;
@@ -72,7 +75,26 @@ public class GameScreen {
         stage.show();
 
         stage.setTitle("PulseRoque");
+//        //onMouseClick movement
+//        EventHandler<MouseEvent> eventHandler = new EventHandler<MouseEvent>() {
+//            @Override
+//            public void handle(MouseEvent event) {
+//            }
+//        };
+//        scene.setOnMousePressedProperty(new EventHandler<MouseEvent>() {
+//            @Override
+//            public void handle(MouseEvent event) {
+//                throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+//            }
+//        });
 
+//                 this.setOnMouseEntered(new EventHandler<MouseEvent>() {
+//
+//                @Override
+//                public void handle(MouseEvent t) {
+//                    rect.setStroke(activeBorderColor);
+//                }
+//            });
     }
     private MyNode[][] screen;
     private int tilesInWidth = 21;//71;
@@ -82,11 +104,13 @@ public class GameScreen {
     private int fontSize;
     private int zoomLevel = 3;
     private int boardOffset = 15;
-
+    private Point localPPos;
+    
+    
     public void draw(mapAndCenter a) {
         draw(a.getMap(), a.getCenterX(), a.getCenterY());
     }
-    
+
     public void draw(char[][] map, int centerX, int centerY) {
 //        int yOffset = map.length - 1 - centerY + 10;
 //        if (centerY + 10 > map.length) {
@@ -118,6 +142,9 @@ public class GameScreen {
                     screen[y][x].setVisible(true);
 
                 }
+                if (map[yMin + y][xMin + x] == '@') {
+                    localPPos = new Point(x, y);
+                }
 //                else {
 //                    screen[y][x].getLabel().setText("M");
 //////                    screen[y][x].
@@ -137,6 +164,14 @@ public class GameScreen {
             }
         }
 
+    }
+
+    public double figureMapX(double x) {
+        return (x - boardOffset) / gridWidth;
+    }
+
+    public double figureMapY(double y) {
+        return (y - boardOffset) / gridHeight;
     }
 
     private void defZoom() {
@@ -162,12 +197,18 @@ public class GameScreen {
         return scene;
     }
 
+    public Point getLocalPPos() {
+        return localPPos;
+    }
+    
+
     private class MyNode extends StackPane {
 
         private Label label;
         private Color textColor;
         private Color backgroundColor;
         private Color borderColor;
+        private Color activeBorderColor;
         private int fontSize;
         private Rectangle rect;
         private double x;
@@ -179,10 +220,11 @@ public class GameScreen {
             this.y = y;
             Color edit = Color.RED;//.deriveColor(1, 1, 1, 0.5);
             textColor = edit;
-            borderColor = Color.ALICEBLUE;
+            borderColor = Color.BLACK;//Color.ALICEBLUE;
+            activeBorderColor = Color.CHARTREUSE;
             fontSize = 40;
 
-            rect = new Rectangle(gridWidth, gridHeight);
+            rect = new Rectangle(gridWidth - 1, gridHeight - 1);
 //            rect.setFill(Color.AQUA);
             rect.setStroke(borderColor);
             label = new Label("O");
@@ -206,6 +248,23 @@ public class GameScreen {
 //            getChildren().addAll(label);
             getChildren().addAll(rect, label);
             this.managedProperty().bind(this.visibleProperty());
+
+            //onMouseHover Test
+            this.setOnMouseEntered(new EventHandler<MouseEvent>() {
+
+                @Override
+                public void handle(MouseEvent event) {
+                    rect.setStroke(activeBorderColor);
+                }
+            });
+
+            this.setOnMouseExited(new EventHandler<MouseEvent>() {
+
+                @Override
+                public void handle(MouseEvent event) {
+                    rect.setStroke(borderColor);
+                }
+            });
 
         }
 

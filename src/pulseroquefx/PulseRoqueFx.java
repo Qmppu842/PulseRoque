@@ -1,8 +1,11 @@
 package pulseroquefx;
 
+import java.awt.Point;
 import javafx.application.Application;
+import javafx.event.EventHandler;
 import javafx.scene.Scene;
 import javafx.scene.input.KeyCode;
+import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 import pulseroquefx.graphics.GameScreen;
 import pulseroquefx.thegame.CoreGame;
@@ -44,6 +47,26 @@ public class PulseRoqueFx extends Application {
             } else {
                 gs.draw(game.move(x, y));
             }
+        });
+
+        //onMouseClick movement
+//        EventHandler<MouseEvent> eventHandler = new EventHandler<MouseEvent>() {
+//            @Override
+//            public void handle(MouseEvent event) {
+//            }
+//        };
+        scene.setOnMouseClicked(event -> {
+            event.getX();
+            int trueX = (int) Math.floor(gs.figureMapX(event.getX()));
+            int trueY = (int) Math.floor(gs.figureMapY(event.getY()));
+
+            System.out.println("event X: " + event.getX());
+            System.out.println("event Y: " + event.getY());
+            System.out.println("true X: " + trueX);
+            System.out.println("true Y: " + trueY);
+
+            Point pPos = gs.getLocalPPos();
+            gs.draw(game.move(trueX - pPos.x, trueY - pPos.y));
         });
 
     }

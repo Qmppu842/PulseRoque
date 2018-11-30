@@ -56,13 +56,13 @@ public class CoreGame {
             map2[0][i] = new Tile(false, wall);
             map2[i][0] = new Tile(false, wall);
         }
+        map2[pPos.y][pPos.x].setCurrentSymbol('#');
     }
 
     public mapAndCenter idle() {
         return new mapAndCenter(pPos, map);
     }
 
- 
     public mapAndCenter move(int x, int y) {
         return move(new Point(x, y));
     }
@@ -85,32 +85,65 @@ public class CoreGame {
     private class Tile {
 
         private boolean isPassable;
-        private char symbol;
+        private char oldSymbol;
+        private char currentSymbol;
+        private boolean isHereSomething;
 
         public Tile(boolean isPassable, char symbol) {
             this.isPassable = isPassable;
-            this.symbol = symbol;
+            this.oldSymbol = symbol;
+            isHereSomething = false;
         }
 
         public boolean isIsPassable() {
             return isPassable;
         }
-
+        /**
+         * Can Entities enter to this tile.
+         * @param isPassable 
+         */
         public void setIsPassable(boolean isPassable) {
             this.isPassable = isPassable;
         }
 
-        public char getSymbol() {
-            return symbol;
+        /**
+         * Enter to this tile. This also sets currentSymbol as the thing that
+         * entered.
+         *
+         * @param currentSymbol
+         */
+        public void setCurrentSymbol(char currentSymbol) {
+            this.currentSymbol = currentSymbol;
+            isHereSomething = true;
         }
 
-        public void setSymbol(char symbol) {
-            this.symbol = symbol;
+        /**
+         * Returns the symbol to display and removes it from this tile if this
+         * tile had something to remove.
+         *
+         * @return
+         */
+        public char popSymbol() {
+            char symbolToReturn = oldSymbol;
+            if (isHereSomething) {
+                symbolToReturn = currentSymbol;
+            }
+            isHereSomething = false;
+            return symbolToReturn;
         }
 
-    }
-
-    private class ThingOnTiles {
+        /**
+         * Returns the symbol to display without removing it from tile
+         *
+         * @return
+         */
+        public char peekSymbol() {
+            char symbolToReturn = oldSymbol;
+            if (isHereSomething) {
+                symbolToReturn = currentSymbol;
+            }
+            return symbolToReturn;
+        }
 
     }
 

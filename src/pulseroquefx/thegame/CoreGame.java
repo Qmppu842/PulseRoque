@@ -1,6 +1,6 @@
 package pulseroquefx.thegame;
 
-import pulseroquefx.thegame.mapthings.mapAndCenter;
+import pulseroquefx.thegame.mapthings.MapAndCenter;
 import java.awt.Point;
 import pulseroquefx.thegame.mapthings.Tile;
 
@@ -40,11 +40,11 @@ public class CoreGame {
 
     //TODO: Istead of coregame commanding player directly, there should be Player class that has distinct actions.
     //And then coreGame should have method turn that goes through list of things that have turns.
-    public mapAndCenter idle() {
-        return new mapAndCenter(pPos, map2);
+    public MapAndCenter idle() {
+        return new MapAndCenter(pPos, map2);
     }
 
-    public mapAndCenter move(int x, int y) {
+    public MapAndCenter move(int x, int y) {
         return move(new Point(x, y));
     }
 
@@ -54,18 +54,27 @@ public class CoreGame {
      * @param dir
      * @return
      */
-    public mapAndCenter move(Point dir) {
+    public MapAndCenter move(Point dir) {
         Point oldLoc = (Point) pPos.clone();
         pPos.translate(dir.x, dir.y);
-
-        Tile target = map2[pPos.y][pPos.x];
-        Tile oldLocation = map2[oldLoc.y][oldLoc.x];
-        if (target.isIsPassable()) {
-            char thignToMove = oldLocation.popSymbol();
-            target.setCurrentSymbol(thignToMove);
-            oldLocation.setCurrentSymbol('x');
+        if (oldLoc.distance(pPos) != 0) {
+            Tile target = map2[pPos.y][pPos.x];
+            Tile oldLocation = map2[oldLoc.y][oldLoc.x];
+            if (target.isIsPassable()) {
+                char thingToMove = oldLocation.popSymbol();
+                target.setCurrentSymbol(thingToMove);
+                if (thingToMove == '@') {
+                    target.setCurrentSymbol('@');
+                }
+                oldLocation.setCurrentSymbol('x');
+            } else {
+                pPos = oldLoc;
+            }
         }
+        return new MapAndCenter(pPos, map2);
+    }
 
-        return new mapAndCenter(pPos, map2);
+    public MapAndCenter getSituation() {
+        return new MapAndCenter(pPos, map2);
     }
 }

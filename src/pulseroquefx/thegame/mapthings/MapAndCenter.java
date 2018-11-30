@@ -6,12 +6,12 @@ import java.awt.Point;
  *
  * @author Qmppu842
  */
-public class mapAndCenter {
+public class MapAndCenter {
 
     private Point pPos;
     private Tile[][] map;
 
-    public mapAndCenter(Point pPos, Tile[][] map) {
+    public MapAndCenter(Point pPos, Tile[][] map) {
         this.pPos = pPos;
         this.map = map;
     }

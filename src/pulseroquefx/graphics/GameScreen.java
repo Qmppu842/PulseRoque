@@ -16,7 +16,7 @@ import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 import javafx.stage.Stage;
-import pulseroquefx.thegame.mapthings.mapAndCenter;
+import pulseroquefx.thegame.mapthings.MapAndCenter;
 
 /**
  *
@@ -105,9 +105,8 @@ public class GameScreen {
     private int zoomLevel = 3;
     private int boardOffset = 15;
     private Point localPPos;
-    
-    
-    public void draw(mapAndCenter a) {
+
+    public void draw(MapAndCenter a) {
         draw(a.getFlattedMap(), a.getCenterX(), a.getCenterY());
     }
 
@@ -200,7 +199,6 @@ public class GameScreen {
     public Point getLocalPPos() {
         return localPPos;
     }
-    
 
     private class MyNode extends StackPane {
 

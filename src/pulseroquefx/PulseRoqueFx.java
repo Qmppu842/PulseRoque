@@ -29,7 +29,6 @@ public class PulseRoqueFx extends Application {
             int y = 0;
             if (event.getCode() == KeyCode.A) {
                 x = -1;
-
             }
             if (event.getCode() == KeyCode.D) {
                 x = 1;
@@ -48,7 +47,6 @@ public class PulseRoqueFx extends Application {
         });
 
         scene.setOnMouseClicked(event -> {
-            event.getX();
             int trueX = (int) Math.floor(gs.figureMapX(event.getX()));
             int trueY = (int) Math.floor(gs.figureMapY(event.getY()));
 

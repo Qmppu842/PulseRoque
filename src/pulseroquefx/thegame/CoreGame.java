@@ -61,85 +61,8 @@ public class CoreGame {
     public mapAndCenter idle() {
         return new mapAndCenter(pPos, map);
     }
-    private boolean didMovementHappen;
 
-    public mapAndCenter moveManyTiles(int x, int y) {
-        //TODO: implement some pathfinding algo here maybe?
-        //For now, it will have just reducing y distance and x distance separetly.
-        System.out.println("localPPos.x: " + x);
-        System.out.println("localPPos.y: " + y);
-        Point target = new Point(x + pPos.x, y + pPos.y);
-        int distX = x;//x;//- pPos.x;
-        int distY = y;// y;//- pPos.y;
-        didMovementHappen = distX != 0 || distY != 0;
-//        do {
-//            distX = x;//pPos.x - x;
-//            distY = y;//pPos.y - y;
-//            System.out.println("distX: " + distX);
-//            System.out.println("distY: " + distY);
-//            if (distX == 0 && distY == 0) {
-//                didMovementHappen = false;
-//                break;
-//            }
-//            int dirX = 0;
-//            int dirY = 0;
-//
-//            if (distX < 0) {
-//                dirX = 1;
-//            } else if (distX > 0) {
-//                dirX = -1;
-//            }
-//            if (distY < 0) {
-//                dirY = 1;
-//            } else if (distY > 0) {
-//                dirY = -1;
-//            }
-//
-////            if (distX != 0) {
-////                dirX = distX / Math.abs(distX);
-////            }
-////            if (distY != 0) {
-////                dirY = distY / Math.abs(distY);
-////            }
-//            System.out.println("truePPos: " + pPos);
-//            System.out.println("futureX: " + pPos.x + dirX);
-//            System.out.println("futureY: " + pPos.y + dirY);
-//            move(pPos.x + dirX, pPos.y + dirY);
-//        } while (didMovementHappen);
-
-        while (didMovementHappen) {
-//            distX = target.x - pPos.x;//pPos.x - x;
-//            distY = target.y - pPos.y;//pPos.y - y;
-            distX = pPos.x - target.x;//pPos.x - x;
-            distY = pPos.y - target.y;//pPos.y - y;
-
-            System.out.println("distX: " + distX);
-            System.out.println("distY: " + distY);
-            if (distX == 0 && distY == 0) {
-                break;
-            }
-            int dirX = 0;
-            int dirY = 0;
-
-            if (distX < 0) {
-                dirX = 1;
-            } else if (distX > 0) {
-                dirX = -1;
-            }
-            if (distY < 0) {
-                dirY = 1;
-            } else if (distY > 0) {
-                dirY = -1;
-            }
-
-            System.out.println("truePPos: " + pPos);
-            System.out.println("futureX: " + pPos.x + dirX);
-            System.out.println("futureY: " + pPos.y + dirY);
-            move(pPos.x + dirX, pPos.y + dirY);
-        }
-        return idle();
-    }
-
+ 
     public mapAndCenter move(int x, int y) {
         return move(new Point(x, y));
     }
@@ -155,8 +78,6 @@ public class CoreGame {
         pPos.translate(dir.x, dir.y);
         map[pPos.y][pPos.x] = '@';
         map[oldLoc.y][oldLoc.x] = 'x';
-
-        didMovementHappen = true;
 
         return new mapAndCenter(pPos, map);
     }

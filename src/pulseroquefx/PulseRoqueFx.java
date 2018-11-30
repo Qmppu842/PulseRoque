@@ -25,7 +25,6 @@ public class PulseRoqueFx extends Application {
 
         Scene scene = gs.getScene();
         scene.setOnKeyPressed(event -> {
-//            System.out.println(event.getCode().toString());
             int x = 0;
             int y = 0;
             if (event.getCode() == KeyCode.A) {
@@ -41,7 +40,6 @@ public class PulseRoqueFx extends Application {
             if (event.getCode() == KeyCode.S) {
                 y = 1;
             }
-//            System.out.println("xx: " + xx + ", yy: " + yy);
             if (x == 0 && y == 0) {
                 gs.draw(game.idle());
             } else {
@@ -49,25 +47,12 @@ public class PulseRoqueFx extends Application {
             }
         });
 
-        //onMouseClick movement
-//        EventHandler<MouseEvent> eventHandler = new EventHandler<MouseEvent>() {
-//            @Override
-//            public void handle(MouseEvent event) {
-//            }
-//        };
         scene.setOnMouseClicked(event -> {
             event.getX();
             int trueX = (int) Math.floor(gs.figureMapX(event.getX()));
             int trueY = (int) Math.floor(gs.figureMapY(event.getY()));
-//            System.out.println("_________________________");
-//            System.out.println("event X: " + event.getX());
-//            System.out.println("event Y: " + event.getY());
-//            System.out.println("true X: " + trueX);
-//            System.out.println("true Y: " + trueY);
 
             Point localPPos = gs.getLocalPPos();
-//            System.out.println("lPPos: " + localPPos);
-//            Point localDistBetweenPAndClick = localPPos.distanc;
             gs.draw(game.move(trueX - localPPos.x, trueY - localPPos.y));
         });
 

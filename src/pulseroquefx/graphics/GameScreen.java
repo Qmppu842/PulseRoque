@@ -108,7 +108,7 @@ public class GameScreen {
     
     
     public void draw(mapAndCenter a) {
-        draw(a.getMap(), a.getCenterX(), a.getCenterY());
+        draw(a.getFlattedMap(), a.getCenterX(), a.getCenterY());
     }
 
     public void draw(char[][] map, int centerX, int centerY) {

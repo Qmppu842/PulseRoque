@@ -9,19 +9,25 @@ import java.awt.Point;
 public class mapAndCenter {
 
     private Point pPos;
-    private char[][] map;
+    private Tile[][] map;
 
-    public mapAndCenter(Point pPos, char[][] map) {
+    public mapAndCenter(Point pPos, Tile[][] map) {
         this.pPos = pPos;
         this.map = map;
     }
 
-    public Point getpPos() {
+    public Point getPPos() {
         return pPos;
     }
 
-    public char[][] getMap() {
-        return map;
+    public char[][] getFlattedMap() {
+        char[][] flatMap = new char[map.length][map[0].length];
+        for (int y = 0; y < map.length; y++) {
+            for (int x = 0; x < map[y].length; x++) {
+                flatMap[y][x] = map[y][x].peekSymbol();
+            }
+        }
+        return flatMap;
     }
 
     public int getCenterX() {

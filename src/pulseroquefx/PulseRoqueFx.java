@@ -1,6 +1,7 @@
 package pulseroquefx;
 
 import java.awt.Point;
+import java.util.ArrayList;
 import javafx.application.Application;
 import javafx.event.EventHandler;
 import javafx.scene.Scene;
@@ -61,6 +62,20 @@ public class PulseRoqueFx extends Application {
      */
     public static void main(String[] args) {
         launch(args);
+//        ArrayList<Runnable> aa;
+//        aa = new ArrayList<>();
+//        aa.add(() -> {
+//        PulseRoqueFx.getSYMBOL();
+//        });
+//        System.out.println(aa);
+//        Runnable dd = aa.get(0);
+////        char mm = 
+//                dd.run();
     }
+    
+//    public static void getSYMBOL() {
+//        System.out.println("kala");
+//    }
+    
 
 }

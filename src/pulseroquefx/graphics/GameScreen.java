@@ -140,9 +140,9 @@ public class GameScreen {
                     screen[y][x].getLabel().setText("" + map[yMin + y][xMin + x]);
                     screen[y][x].setVisible(true);
 
-                }
                 if (map[yMin + y][xMin + x] == '@') {
                     localPPos = new Point(x, y);
+                }
                 }
 //                else {
 //                    screen[y][x].getLabel().setText("M");

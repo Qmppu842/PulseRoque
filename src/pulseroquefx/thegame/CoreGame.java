@@ -16,10 +16,10 @@ public class CoreGame {
 
     public CoreGame() {
         pPos = new Point(1, 1);
-        size = 50;
+        size = 10;
         initBasicMap();
     }
-
+    //TODO: make so that entities handle their own turns but movement should be handled from here.
     public void initBasicMap() {
         map2 = new Tile[size][size];
         char floor = '.';

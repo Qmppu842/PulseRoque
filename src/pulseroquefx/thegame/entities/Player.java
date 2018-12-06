@@ -15,6 +15,6 @@ public class Player {
     public Player() {
         position = new Point(1, 1);
         isThisPassable = false;
-    }
+    }    
 
 }
